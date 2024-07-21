@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AspNetCoreCrudPractice.Models.DomainModels.Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<script src="~/lib/dataTables.min.js"></script>
+
+
+<h2>Employee List</h2>
+
+<table id="employeeTable" class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Salary</th>
+            <th>Date Of Birth</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Email</td>
+                <td>@employee.Salary</td>
+                <td>@employee.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                <td>@employee.Department</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = employee.Id })">Edit</a> |
+                    <a href="@Url.Action("Delete", new { id = employee.Id })">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#employeeTable').DataTable();
+        });
+    </script>
+}
